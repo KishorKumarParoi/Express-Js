@@ -10,13 +10,15 @@
 import express from 'express';
 // module scaffolding
 const app = express();
+app.use(express.json());
 
 console.log(app);
 app.get('/', (req, res) => {
     res.send('This is Home Page!');
 });
 
-app.post('/about', (req, res) => {
+app.post('/', (req, res) => {
+    console.log(req.body);
     res.send('THis is about page');
 });
 
