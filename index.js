@@ -10,7 +10,7 @@
 import express from 'express';
 // module scaffolding
 const app = express();
-app.use(express.raw());
+app.use(express.urlencoded());
 
 console.log(app);
 app.get('/', (req, res) => {
@@ -18,7 +18,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-    console.log(req.body.toString());
+    console.log(req.body);
+    console.log(typeof req.body);
     res.send('THis is about page');
 });
 
