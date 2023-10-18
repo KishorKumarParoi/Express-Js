@@ -10,7 +10,7 @@
 import express from 'express';
 // module scaffolding
 const app = express();
-app.use(express.urlencoded());
+app.use(express.static(`${process.cwd()}/Raw/`));
 
 console.log(app);
 app.get('/', (req, res) => {
