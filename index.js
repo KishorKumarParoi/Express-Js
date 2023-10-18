@@ -10,18 +10,24 @@
 import express from 'express';
 // module scaffolding
 const app = express();
-app.use(
-    express.static(`${process.cwd()}/Raw/`, {
-        index: 'home.html',
-    })
-);
 
-console.log(app);
-app.get('/', (req, res) => {
+const router = express.Router({
+    caseSensitive: true,
+});
+app.use(router);
+
+// app.use(
+//     express.static(`${process.cwd()}/Raw/`, {
+//         index: 'home.html',
+//     })
+// );
+
+// console.log(router);
+router.post('/', (req, res) => {
     res.send('This is Home Page!');
 });
 
-app.post('/', (req, res) => {
+router.get('/about', (req, res) => {
     console.log(req.body);
     console.log(typeof req.body);
     res.send('THis is about page');
