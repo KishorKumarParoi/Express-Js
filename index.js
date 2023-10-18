@@ -8,13 +8,15 @@
 
 // dependencies
 import express from 'express';
+import handle from './handle.js';
+
 // module scaffolding
 const app = express();
 
-const router = express.Router({
-    caseSensitive: true,
-});
-app.use(router);
+// const router = express.Router({
+//     caseSensitive: true,
+// });
+// app.use(router);
 
 // app.use(
 //     express.static(`${process.cwd()}/Raw/`, {
@@ -23,15 +25,16 @@ app.use(router);
 // );
 
 // console.log(router);
-router.post('/', (req, res) => {
+
+app.use(express.json());
+app.locals.title = 'My App';
+app.locals.author = 'Kishor Paroi';
+
+app.post('/', (req, res) => {
     res.send('This is Home Page!');
 });
 
-router.get('/about', (req, res) => {
-    console.log(req.body);
-    console.log(typeof req.body);
-    res.send('THis is about page');
-});
+app.get('/about', handle);
 
 app.listen(3000, () => {
     console.log('listening to port 3000');
