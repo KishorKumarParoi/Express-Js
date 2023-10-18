@@ -10,7 +10,11 @@
 import express from 'express';
 // module scaffolding
 const app = express();
-app.use(express.static(`${process.cwd()}/Raw/`));
+app.use(
+    express.static(`${process.cwd()}/Raw/`, {
+        index: 'home.html',
+    })
+);
 
 console.log(app);
 app.get('/', (req, res) => {
