@@ -12,7 +12,9 @@ import express from 'express';
 
 // module scaffolding
 const app = express();
-// const admin = express();
+const blog = express();
+const blogAdmin = express();
+const admin = express();
 
 // const router = express.Router({
 //     caseSensitive: true,
@@ -58,7 +60,6 @@ app.param('id', (req, res, next, id) => {
 });
 
 app.set('home', 'about');
-
 app.all('/about/:id', (req, res) => {
     console.log(req.body);
     console.log(req.userDetails);
@@ -66,10 +67,10 @@ app.all('/about/:id', (req, res) => {
     res.send('This is Home Page!');
 });
 
-// admin.get('/dashboard', (req, res) => {
-//     console.log(admin.mountpath);
-//     res.send('Welcome to admin dashboard');
-// });
+admin.get('/dashboard', (req, res) => {
+    console.log(admin.mountpath);
+    res.send('Welcome to admin dashboard');
+});
 
 // admin.on('mount', (parent) => {
 //     console.log('Admin Mounted');
@@ -77,7 +78,14 @@ app.all('/about/:id', (req, res) => {
 //     console.log('🚀 ~ file: index.js:50 ~ admin.on ~ app:', app);
 // });
 
-// app.use('/admin', admin);
+app.use('/admin', admin);
+app.use('/blog', blog);
+blog.use('/admin', blogAdmin);
+
+console.dir(app.path());
+console.dir(blog.path());
+console.dir(blogAdmin.path());
+console.dir(admin.path());
 
 app.listen(3000, () => {
     console.log('listening to port 3000');
