@@ -57,7 +57,9 @@ app.param('id', (req, res, next, id) => {
     next();
 });
 
-app.all('/home/:id', (req, res) => {
+app.set('home', 'about');
+
+app.all('/about/:id', (req, res) => {
     console.log(req.body);
     console.log(req.userDetails);
     // console.log(req);
