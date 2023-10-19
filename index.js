@@ -39,7 +39,7 @@ app.post('/', (req, res) => {
 });
 
 admin.get('/dashboard', (req, res) => {
-    console.log(req.body);
+    console.log(admin.mountpath);
     res.send('Welcome to admin dashboard');
 });
 
