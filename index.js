@@ -43,8 +43,24 @@ console.log('🚀 ~ file: index.js:31 ~ app.disabled():', app.disabled());
 //     res.send('Welcome to contact list');
 // });
 
-app.all('/home', (req, res) => {
+app.param('id', (req, res, next, id) => {
+    console.log('🚀 ~ file: index.js:48 ~ app.param ~ id:', id);
+    const userObject = {
+        userId: id,
+        name: 'Kishor',
+    };
+    req.userDetails = userObject;
+    req.body = {
+        name: 'Kishor Paroi',
+        dream: '100K Dollar in every month',
+    };
+    next();
+});
+
+app.all('/home/:id', (req, res) => {
     console.log(req.body);
+    console.log(req.userDetails);
+    // console.log(req);
     res.send('This is Home Page!');
 });
 
