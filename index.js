@@ -33,7 +33,9 @@ const admin = express();
 // app.locals.author = 'Kishor Paroi';
 
 app.get('/about', handle);
-app.post('/', (req, res) => {
+app.use(express.json());
+
+app.all('/', (req, res) => {
     console.log(req.body);
     res.send('This is Home Page!');
 });
