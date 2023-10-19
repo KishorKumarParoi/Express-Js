@@ -26,17 +26,20 @@ const admin = express();
 // );
 
 // console.log(router);
-
-// app.use(express.json());
-
-// app.locals.title = 'My App';
-// app.locals.author = 'Kishor Paroi';
-
-app.get('/about', handle);
+app.locals.title = 'My App';
+app.locals.author = 'Kishor Paroi';
 app.use(express.json());
 
-app.all('/', (req, res) => {
+app.get('/about', handle);
+
+app.get('/contact', (req, res) => {
     console.log(req.body);
+    console.log(typeof req.body);
+    res.send('Welcome to contact list');
+});
+
+app.all('/', (req, res) => {
+    console.log(`${req.body}`);
     res.send('This is Home Page!');
 });
 
@@ -45,11 +48,12 @@ admin.get('/dashboard', (req, res) => {
     res.send('Welcome to admin dashboard');
 });
 
-admin.on('mount', (parent) => {
-    console.log('Admin Mounted');
-    console.log('🚀 ~ file: index.js:49 ~ admin.on ~ parent:', parent);
-    console.log('🚀 ~ file: index.js:50 ~ admin.on ~ app:', app);
-});
+// admin.on('mount', (parent) => {
+//     console.log('Admin Mounted');
+//     console.log('🚀 ~ file: index.js:49 ~ admin.on ~ parent:', parent);
+//     console.log('🚀 ~ file: index.js:50 ~ admin.on ~ app:', app);
+// });
+
 app.use('/admin', admin);
 
 app.listen(3000, () => {
