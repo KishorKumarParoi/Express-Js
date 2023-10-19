@@ -27,12 +27,12 @@ const admin = express();
 
 // console.log(router);
 
-app.use(express.json());
-app.use('/admin', admin);
+// app.use(express.json());
 
-app.locals.title = 'My App';
-app.locals.author = 'Kishor Paroi';
+// app.locals.title = 'My App';
+// app.locals.author = 'Kishor Paroi';
 
+app.get('/about', handle);
 app.post('/', (req, res) => {
     console.log(req.body);
     res.send('This is Home Page!');
@@ -43,7 +43,12 @@ admin.get('/dashboard', (req, res) => {
     res.send('Welcome to admin dashboard');
 });
 
-app.get('/about', handle);
+admin.on('mount', (parent) => {
+    console.log('Admin Mounted');
+    console.log('🚀 ~ file: index.js:49 ~ admin.on ~ parent:', parent);
+    console.log('🚀 ~ file: index.js:50 ~ admin.on ~ app:', app);
+});
+app.use('/admin', admin);
 
 app.listen(3000, () => {
     console.log('listening to port 3000');
