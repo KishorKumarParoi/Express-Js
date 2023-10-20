@@ -60,7 +60,13 @@ app.param('id', (req, res, next, id) => {
 });
 
 app.set('home', 'about');
+
 app.all('/about/:id', (req, res) => {
+    // req.query
+    console.log('🚀 ~ file: index.js:66 ~ app.all ~ req.query:', req.query);
+    console.log('🚀 ~ file: index.js:66 ~ app.all ~   req.protocol:', req.protocol);
+    console.log('🚀 ~ file: index.js:65 ~ app.all ~ req.path:', req.path);
+    console.log('🚀 ~ file: index.js:65 ~ app.all ~ req.params:', req.params);
     console.log('🚀 ~ file: index.js:65 ~ app.all ~ req.body:', req.body);
     console.log('🚀 ~ file: index.js:66 ~ app.all ~ req.userDetails:', req.userDetails);
     console.log('🚀 ~ file: index.js:67 ~ app.all ~ req.baseUrl:', req.baseUrl);
@@ -68,8 +74,12 @@ app.all('/about/:id', (req, res) => {
 });
 
 admin.get('/dashboard', (req, res) => {
+    console.log('🚀 ~ file: index.js:72 ~ admin.get ~ req.originalUrl:', req.originalUrl);
+    console.log('🚀 ~ file: index.js:72 ~ admin.get ~  req.url:', req.url);
     console.log('🚀 ~ file: index.js:72 ~ admin.get ~ req.baseUrl:', req.baseUrl);
-    console.log(admin.mountpath);
+    console.log('🚀 ~ file: index.js:74 ~ admin.get ~ req.ip:', req.ip);
+    console.log('🚀 ~ file: index.js:76 ~ admin.get ~ admin.mountpath:', admin.mountpath);
+    console.log('🚀 ~ file: index.js:74 ~ admin.get ~ req.hostname:', req.hostname);
     res.send('Welcome to admin dashboard');
 });
 
