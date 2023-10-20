@@ -61,13 +61,14 @@ app.param('id', (req, res, next, id) => {
 
 app.set('home', 'about');
 app.all('/about/:id', (req, res) => {
-    console.log(req.body);
-    console.log(req.userDetails);
-    // console.log(req);
+    console.log('🚀 ~ file: index.js:65 ~ app.all ~ req.body:', req.body);
+    console.log('🚀 ~ file: index.js:66 ~ app.all ~ req.userDetails:', req.userDetails);
+    console.log('🚀 ~ file: index.js:67 ~ app.all ~ req.baseUrl:', req.baseUrl);
     res.send('This is Home Page!');
 });
 
 admin.get('/dashboard', (req, res) => {
+    console.log('🚀 ~ file: index.js:72 ~ admin.get ~ req.baseUrl:', req.baseUrl);
     console.log(admin.mountpath);
     res.send('Welcome to admin dashboard');
 });
