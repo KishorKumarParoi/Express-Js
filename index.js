@@ -32,7 +32,7 @@ const admin = express();
 app.disable('case sensitive routing');
 // app.locals.title = 'My App';
 // app.locals.author = 'Kishor Paroi';
-// app.use(express.json());
+app.use(express.json());
 
 console.log('🚀 ~ file: index.js:34 ~ app.enabled():', app.enabled());
 console.log('🚀 ~ file: index.js:31 ~ app.disabled():', app.disabled());
@@ -86,6 +86,21 @@ console.dir(app.path());
 console.dir(blog.path());
 console.dir(blogAdmin.path());
 console.dir(admin.path());
+
+app.get('/test', (req, res) => {
+    console.log(req.body);
+    res.send('Get method');
+});
+
+app.post('/test', (req, res) => {
+    console.log(req.body);
+    res.send('Post Method');
+});
+
+app.put('/test', (req, res) => {
+    console.log(req.body);
+    res.send('Put Method');
+});
 
 app.listen(3000, () => {
     console.log('listening to port 3000');
