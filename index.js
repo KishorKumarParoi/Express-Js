@@ -87,10 +87,12 @@ console.dir(blog.path());
 console.dir(blogAdmin.path());
 console.dir(admin.path());
 
+app.set('view engine', 'ejs');
+
 app.route('/test')
     .get((req, res) => {
         console.log(req.body);
-        res.send('Get method');
+        res.render('pages/about');
     })
     .post((req, res) => {
         console.log(req.body);
