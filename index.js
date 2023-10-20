@@ -96,7 +96,7 @@ app.route('/test')
     })
     .post((req, res) => {
         console.log(req.body);
-        res.send('Post Method');
+        res.render('index');
     })
     .put((req, res) => {
         console.log(req.body);
