@@ -7,6 +7,7 @@
  */
 
 // dependencies
+import cookieParser from 'cookie-parser';
 import express from 'express';
 // import handle from './handle.js';
 
@@ -33,6 +34,7 @@ app.disable('case sensitive routing');
 // app.locals.title = 'My App';
 // app.locals.author = 'Kishor Paroi';
 app.use(express.json());
+app.use(cookieParser());
 
 console.log('🚀 ~ file: index.js:34 ~ app.enabled():', app.enabled());
 console.log('🚀 ~ file: index.js:31 ~ app.disabled():', app.disabled());
@@ -62,7 +64,10 @@ app.param('id', (req, res, next, id) => {
 app.set('home', 'about');
 
 app.all('/about/:id', (req, res) => {
-    // req.query
+    // req.secure
+    console.log(req.secure);
+    console.log('🚀 ~ file: index.js:68 ~ app.all ~ req.signedCookies:', req.signedCookies);
+    console.log('🚀 ~ file: index.js:66 ~ app.all ~ req.cookies:', req.cookies);
     console.log('🚀 ~ file: index.js:66 ~ app.all ~ req.query:', req.query);
     console.log('🚀 ~ file: index.js:66 ~ app.all ~   req.protocol:', req.protocol);
     console.log('🚀 ~ file: index.js:65 ~ app.all ~ req.path:', req.path);
