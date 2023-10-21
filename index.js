@@ -9,7 +9,7 @@
 // dependencies
 import cookieParser from 'cookie-parser';
 import express from 'express';
-// import handle from './handle.js';
+import handle from './handle.js';
 
 // module scaffolding
 const app = express();
@@ -31,15 +31,15 @@ const admin = express();
 // console.log(router);
 // app.enable('case sensitive routing');
 app.disable('case sensitive routing');
-// app.locals.title = 'My App';
-// app.locals.author = 'Kishor Paroi';
+app.locals.title = 'My App';
+app.locals.author = 'Kishor Paroi';
 app.use(express.json());
 app.use(cookieParser());
 
 console.log('🚀 ~ file: index.js:34 ~ app.enabled():', app.enabled());
 console.log('🚀 ~ file: index.js:31 ~ app.disabled():', app.disabled());
 
-// app.get('/about', handle);
+app.get('/about', handle);
 
 // app.get('/contact', (req, res) => {
 //     console.log(req.body);
@@ -63,7 +63,7 @@ app.param('id', (req, res, next, id) => {
 
 app.set('home', 'about');
 
-app.all('/about/:id', (req, res) => {
+app.post('/about/:id', (req, res) => {
     // req.secure
     console.log(req.secure);
     console.log('🚀 ~ file: index.js:68 ~ app.all ~ req.signedCookies:', req.signedCookies);
