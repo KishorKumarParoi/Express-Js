@@ -41,11 +41,11 @@ console.log('🚀 ~ file: index.js:31 ~ app.disabled():', app.disabled());
 
 app.get('/about', handle);
 
-// app.get('/contact', (req, res) => {
-//     console.log(req.body);
-//     console.log(typeof req.body);
-//     res.send('Welcome to contact list');
-// });
+app.get('/contact', (req, res) => {
+    console.log(req.body);
+    console.log(typeof req.body);
+    res.send('Welcome to contact list');
+});
 
 app.param('id', (req, res, next, id) => {
     console.log('🚀 ~ file: index.js:48 ~ app.param ~ id:', id);
