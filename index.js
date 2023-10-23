@@ -64,7 +64,7 @@ app.param('id', (req, res, next, id) => {
 app.set('home', 'about');
 
 app.post('/about/:id', (req, res) => {
-    // req.secure
+    // req.route
     console.log(req.secure);
     console.log('🚀 ~ file: index.js:68 ~ app.all ~ req.signedCookies:', req.signedCookies);
     console.log('🚀 ~ file: index.js:66 ~ app.all ~ req.cookies:', req.cookies);
