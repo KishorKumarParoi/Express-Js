@@ -54,25 +54,28 @@ app.get('/contact', (req, res) => {
     //     Salary: '100k USD Dollar',
     // });
 
-    res.format({
-        'text/plain': () => {
-            res.send('Hi');
-        },
-        'text/html': () => {
-            res.render('pages/about', {
-                dream: 'AI Developer',
-            });
-        },
-        'application/json': () => {
-            res.json({
-                message: 'This is contact list',
-            });
-        },
-        default: () => {
-            res.status(406).send('Not acceptable');
-        },
-    });
+    // res.format({
+    //     'text/plain': () => {
+    //         res.send('Hi');
+    //     },
+    //     'text/html': () => {
+    //         res.render('pages/about', {
+    //             dream: 'AI Developer',
+    //         });
+    //     },
+    //     'application/json': () => {
+    //         res.json({
+    //             message: 'This is contact list',
+    //         });
+    //     },
+    //     default: () => {
+    //         res.status(406).send('Not acceptable');
+    //     },
+    // });
 
+    res.cookie('Name', 'Kishor Kumar Paroi');
+    res.cookie('Age', '24');
+    res.end();
     // res.sendStatus(403);
 });
 
