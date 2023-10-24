@@ -82,6 +82,7 @@ app.post('/about/:id', (req, res) => {
 
 app.get('/about/:id', (req, res) => {
     // req.accepts
+    console.log('🚀 ~ file: index.js:86 ~ app.get ~ req.get:', req.get('Content-Type'));
     console.log('🚀 ~ file: index.js:85 ~ app.get ~   req.accepts:', req.accepts());
     console.log('🚀 ~ file: index.js:83 ~ app.get ~ req.route:', req.route);
     console.log(req.secure);
