@@ -75,6 +75,8 @@ app.get('/contact', (req, res) => {
 
     res.cookie('Name', 'Kishor Kumar Paroi');
     res.cookie('Age', '24');
+    res.location('/test');
+    res.redirect('/about');
     res.end();
     // res.sendStatus(403);
 });
