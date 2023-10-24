@@ -73,7 +73,7 @@ app.get('/contact', (req, res) => {
         },
     });
 
-    res.sendStatus(403);
+    // res.sendStatus(403);
 });
 
 app.param('id', (req, res, next, id) => {
