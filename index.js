@@ -44,10 +44,16 @@ app.get('/about', handle);
 app.get('/contact', (req, res) => {
     console.log(req.body);
     console.log(typeof req.body);
+    console.log('🚀 ~ file: index.js:48 ~ app.get ~ res.headersSent:', res.headersSent);
     res.render('pages/about', {
         dream: 'AI Developer',
     });
-    res.send('Welcome to contact list');
+    console.log('🚀 ~ file: index.js:48 ~ app.get ~ res.headersSent:', res.headersSent);
+    // res.send('Welcome to contact list');
+    // res.json({
+    //     Salary: '100k USD Dollar',
+    // });
+    // res.end();
 });
 
 app.param('id', (req, res, next, id) => {
