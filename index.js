@@ -42,8 +42,8 @@ console.log('🚀 ~ file: index.js:31 ~ app.disabled():', app.disabled());
 app.get('/about', handle);
 
 app.get('/contact', (req, res) => {
-    console.log(req.body);
-    console.log(typeof req.body);
+    // console.log(req.body);
+    // console.log(typeof req.body);
     // console.log('🚀 ~ file: index.js:48 ~ app.get ~ res.headersSent:', res.headersSent);
     // res.render('pages/about', {
     //     dream: 'AI Developer',
@@ -53,6 +53,25 @@ app.get('/contact', (req, res) => {
     // res.json({
     //     Salary: '100k USD Dollar',
     // });
+
+    res.format({
+        'text/plain': () => {
+            res.send('Hi');
+        },
+        'text/html': () => {
+            res.render('pages/about', {
+                dream: 'AI Developer',
+            });
+        },
+        'application/json': () => {
+            res.json({
+                message: 'This is contact list',
+            });
+        },
+        default: () => {
+            res.status(406).send('Not acceptable');
+        },
+    });
 
     res.sendStatus(403);
 });
