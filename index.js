@@ -44,7 +44,9 @@ app.get('/about', handle);
 app.get('/contact', (req, res) => {
     console.log(req.body);
     console.log(typeof req.body);
-    res.render('pages/about');
+    res.render('pages/about', {
+        dream: 'AI Developer',
+    });
     res.send('Welcome to contact list');
 });
 
