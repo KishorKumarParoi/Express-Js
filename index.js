@@ -50,10 +50,11 @@ app.get('/contact', (req, res) => {
     // });
     // console.log('🚀 ~ file: index.js:48 ~ app.get ~ res.headersSent:', res.headersSent);
     // res.send('Welcome to contact list');
-    res.json({
-        Salary: '100k USD Dollar',
-    });
-    // res.end();
+    // res.json({
+    //     Salary: '100k USD Dollar',
+    // });
+
+    res.sendStatus(403);
 });
 
 app.param('id', (req, res, next, id) => {
