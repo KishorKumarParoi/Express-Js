@@ -65,6 +65,7 @@ app.set('home', 'about');
 
 app.post('/about/:id', (req, res) => {
     // req.route
+    console.log('🚀 ~ file: index.js:85 ~ app.get ~   req.accepts:', req.accepts());
     console.log('🚀 ~ file: index.js:68 ~ app.post ~ req.route:', req.route);
     console.log(req.secure);
     console.log('🚀 ~ file: index.js:68 ~ app.all ~ req.signedCookies:', req.signedCookies);
@@ -80,7 +81,8 @@ app.post('/about/:id', (req, res) => {
 });
 
 app.get('/about/:id', (req, res) => {
-    // req.route
+    // req.accepts
+    console.log('🚀 ~ file: index.js:85 ~ app.get ~   req.accepts:', req.accepts());
     console.log('🚀 ~ file: index.js:83 ~ app.get ~ req.route:', req.route);
     console.log(req.secure);
     console.log('🚀 ~ file: index.js:68 ~ app.all ~ req.signedCookies:', req.signedCookies);
