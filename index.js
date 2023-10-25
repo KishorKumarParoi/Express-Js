@@ -112,7 +112,7 @@ const loggerWrapper = (options) => {
     };
 };
 
-adminRoute.use(loggerWrapper({ log: 'false' }));
+adminRoute.use(loggerWrapper({ log: 'true' }));
 
 adminRoute.get('/path', (req, res) => {
     res.send('admin route');
