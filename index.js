@@ -95,10 +95,18 @@ app.param('id', (req, res, next, id) => {
     next();
 });
 
-const adminRoute = express();
+const adminRoute = express.Router();
+
+const logger = (req, res, next) => {
+    console.log(`${new Date(Date.now()).toLocaleString()} - ${req.method} - ${req.originalUrl} - 
+    ${req.protocol} - ${req.ip} - ${req.hostname} - ${req.baseUrl}`);
+    next();
+};
+
+adminRoute.use(logger);
+
 adminRoute.get('/path', (req, res) => {
     res.send('admin route');
-    res.end();
 });
 
 const middleWare = (req, res, next) => {
