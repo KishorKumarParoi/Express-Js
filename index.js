@@ -100,7 +100,9 @@ const adminRoute = express.Router();
 const logger = (req, res, next) => {
     console.log(`${new Date(Date.now()).toLocaleString()} - ${req.method} - ${req.originalUrl} - 
     ${req.protocol} - ${req.ip} - ${req.hostname} - ${req.baseUrl}`);
-    next();
+    // res.send('I am logger');
+    // next();
+    throw new Error('There is an error');
 };
 
 adminRoute.use(logger);
@@ -115,6 +117,13 @@ const middleWare = (req, res, next) => {
 };
 
 app.use(middleWare);
+
+const errorMiddleware = (err, req, res, next) => {
+    console.log(err.message);
+    res.status(500).send('There is an server side error');
+};
+
+adminRoute.use(errorMiddleware);
 
 app.get('/shop', (req, res) => {
     console.log(req.body);
