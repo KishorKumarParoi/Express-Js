@@ -95,17 +95,25 @@ app.param('id', (req, res, next, id) => {
     next();
 });
 
+const adminRoute = express();
+adminRoute.get('/path', (req, res) => {
+    res.send('admin route');
+    res.end();
+});
+
 const middleWare = (req, res, next) => {
     console.log('I am logging');
     next();
 };
+
 app.use(middleWare);
 
 app.get('/shop', (req, res) => {
     console.log(req.body);
     res.send('Shopping');
-    res.end();
 });
+
+app.use('/admin/route', adminRoute);
 
 app.set('home', 'about');
 
