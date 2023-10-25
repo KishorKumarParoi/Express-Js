@@ -97,15 +97,22 @@ app.param('id', (req, res, next, id) => {
 
 const adminRoute = express.Router();
 
-const logger = (req, res, next) => {
-    console.log(`${new Date(Date.now()).toLocaleString()} - ${req.method} - ${req.originalUrl} - 
+const loggerWrapper = (options) => {
+    console.log('🚀 ~ file: index.js:101 ~ loggerWrapper ~ options:', options);
+    return function logger(req, res, next) {
+        if (options.log === 'true') {
+            console.log(`${new Date(Date.now()).toLocaleString()} - ${req.method} - ${
+                req.originalUrl
+            } - 
     ${req.protocol} - ${req.ip} - ${req.hostname} - ${req.baseUrl}`);
-    res.send('I am logger');
-    next();
-    // throw new Error('There is an error');
+            next();
+        } else {
+            throw new Error('There is an error');
+        }
+    };
 };
 
-adminRoute.use(logger);
+adminRoute.use(loggerWrapper({ log: 'false' }));
 
 adminRoute.get('/path', (req, res) => {
     res.send('admin route');
