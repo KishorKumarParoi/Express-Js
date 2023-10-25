@@ -100,9 +100,9 @@ const adminRoute = express.Router();
 const logger = (req, res, next) => {
     console.log(`${new Date(Date.now()).toLocaleString()} - ${req.method} - ${req.originalUrl} - 
     ${req.protocol} - ${req.ip} - ${req.hostname} - ${req.baseUrl}`);
-    // res.send('I am logger');
-    // next();
-    throw new Error('There is an error');
+    res.send('I am logger');
+    next();
+    // throw new Error('There is an error');
 };
 
 adminRoute.use(logger);
@@ -121,6 +121,7 @@ app.use(middleWare);
 const errorMiddleware = (err, req, res, next) => {
     console.log(err.message);
     res.status(500).send('There is an server side error');
+    next();
 };
 
 adminRoute.use(errorMiddleware);
