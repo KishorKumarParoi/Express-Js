@@ -95,6 +95,18 @@ app.param('id', (req, res, next, id) => {
     next();
 });
 
+const middleWare = (req, res, next) => {
+    console.log('I am logging');
+    next();
+};
+app.use(middleWare);
+
+app.get('/shop', (req, res) => {
+    console.log(req.body);
+    res.send('Shopping');
+    res.end();
+});
+
 app.set('home', 'about');
 
 app.post('/about/:id', (req, res) => {
