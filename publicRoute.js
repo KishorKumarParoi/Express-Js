@@ -143,6 +143,24 @@ publicRoute.get('/about/:id', (req, res) => {
     res.send('This is Home Page!');
 });
 
+publicRoute.param('user', (req, res, next, id) => {
+    req.user = id === '1' ? 'admin' : 'anoynomous';
+    console.log('I am called once');
+    next();
+});
+
+publicRoute.get('/:user', (req, res, next) => {
+    console.log(req.body);
+    console.log('called here');
+    // res.send(`This is user page of ${req.user}`);
+    next();
+});
+
+publicRoute.get('/:user', (req, res) => {
+    console.log(req.body);
+    console.log('called here also');
+    res.send(`This is about/user page of ${req.user}`);
+});
 // publicRoute.use('/admin', admin);
 // publicRoute.use('/blog', blog);
 // blog.use('/admin', blogAdmin);
