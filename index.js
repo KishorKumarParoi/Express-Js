@@ -9,7 +9,7 @@
 // dependencies
 import express from 'express';
 import adminRoute from './adminRouter.js';
-// import blog from './blogRoute.js';
+import blogAdmin from './blogRoute.js';
 // import publicRoute from './publicRoute.js';
 // import testRoute from './testRoute.js';
 
@@ -17,7 +17,7 @@ import adminRoute from './adminRouter.js';
 const app = express();
 
 app.use(adminRoute);
-// app.use(blog);
+app.use('/blog', blogAdmin);
 // app.use(publicRoute);
 // app.use(testRoute);
 
