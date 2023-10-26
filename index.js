@@ -16,7 +16,7 @@ import blogAdmin from './blogRoute.js';
 // module scaffolding
 const app = express();
 
-app.use(adminRoute);
+app.use('/admin', adminRoute);
 app.use('/blog', blogAdmin);
 // app.use(publicRoute);
 // app.use(testRoute);

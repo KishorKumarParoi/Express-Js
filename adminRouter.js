@@ -9,6 +9,7 @@
 import express from 'express';
 
 const adminRoute = express.Router();
+adminRoute.use(express.json());
 
 const loggerWrapper = (options) => {
     console.log('🚀 ~ file: adminRouter.js:14 ~ loggerWrapper ~ options:', options);
@@ -31,7 +32,11 @@ adminRoute.get('/path', (req, res) => {
     res.send('admin router');
 });
 
-adminRoute.use('/admin', adminRoute);
+adminRoute.get('/blogging', (req, res) => {
+    console.log(req.body);
+    console.log('blogging');
+    res.send('Admin blogging');
+});
 
 const errorMiddleware = (err, req, res, next) => {
     console.log(err.message);
