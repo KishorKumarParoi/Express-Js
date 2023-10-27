@@ -192,13 +192,28 @@ publicRoute
         res.send('Put Method');
     });
 
+publicRoute.get('/', (req, res, next) => {
+    for (let i = 0; i < 10; i += 1) {
+        if (i === 5) {
+            console.log(i);
+            next('There was an error');
+        } else {
+            res.write('a');
+        }
+    }
+    res.end();
+});
+
+// 404 error handler
 publicRoute.use((req, res, next) => {
     next('Requested URL not found');
     // next();
 });
 
 publicRoute.use((err, req, res, next) => {
-    if (err.message) {
+    if (res.headersSent) {
+        next('There is an headersSent error!');
+    } else if (err.message) {
         res.status(500).send(err.message);
     } else {
         res.status(500).send('There was an error!');
