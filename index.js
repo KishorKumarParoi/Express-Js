@@ -10,7 +10,7 @@
 import express from 'express';
 import adminRoute from './adminRouter.js';
 import blogAdmin from './blogRoute.js';
-// import publicRoute from './publicRoute.js';
+import publicRoute from './publicRoute.js';
 // import testRoute from './testRoute.js';
 
 // module scaffolding
@@ -18,7 +18,7 @@ const app = express();
 
 app.use('/admin', adminRoute);
 app.use('/blog', blogAdmin);
-// app.use(publicRoute);
+app.use(publicRoute);
 // app.use(testRoute);
 
 app.listen(3000, () => {
