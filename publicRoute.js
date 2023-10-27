@@ -172,7 +172,11 @@ publicRoute.get('/:user', (req, res) => {
 publicRoute.set('view engine', 'ejs');
 
 publicRoute
-    .route('/test')
+    .route('/kkp/test')
+    .all((req, res, next) => {
+        console.log('I am called');
+        next();
+    })
     .get((req, res) => {
         console.log(req.body);
         res.render('pages/about', {
