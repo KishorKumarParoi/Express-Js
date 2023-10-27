@@ -225,14 +225,14 @@ publicRoute.get('/async', [
             // }
         });
 
-        // setTimeout(() => {
-        //     try {
-        // throw new Error('BROKEN');
-        //         console.log(a);
-        //     } catch (err) {
-        //         next(err);
-        //     }
-        // }, 100);
+        setTimeout(() => {
+            try {
+                console.log(a);
+                // throw new Error('BROKEN');
+            } catch (err) {
+                next(err);
+            }
+        }, 100);
     },
     (req, res, next) => {
         console.log(data.property);
