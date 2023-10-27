@@ -8,7 +8,6 @@
 
 import cookieParser from 'cookie-parser';
 import express from 'express';
-import fs from 'fs';
 import handle from './handle.js';
 
 // module scaffolding
@@ -215,28 +214,28 @@ publicRoute.get('/', (req, res, next) => {
 
 publicRoute.get('/async', [
     (req, res, next) => {
-        fs.readFile('/file-doesnot-exist', 'utf-8', (err, data) => {
-            // if (err) {
-            console.log(data);
-            next(err);
-            // console.log(data.property); // here crashed as we send error through next()
-            // } else {
-            // res.send(data);
-            // }
-        });
+        // fs.readFile('/file-doesnot-exist', 'utf-8', (err, data) => {
+        //     // if (err) {
+        //     console.log(data);
+        //     next(err);
+        //     // console.log(data.property); // here crashed as we send error through next()
+        //     // } else {
+        //     // res.send(data);
+        //     // }
+        // });
 
         setTimeout(() => {
             try {
-                console.log(a);
-                // throw new Error('BROKEN');
+                // console.log(a);
+                throw new Error('BROKEN');
             } catch (err) {
                 next(err);
             }
         }, 100);
     },
-    (req, res, next) => {
-        console.log(data.property);
-    },
+    // (req, res, next) => {
+    //     console.log(data.property);
+    // },
 ]);
 
 // 404 error handler
