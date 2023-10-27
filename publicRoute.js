@@ -192,4 +192,17 @@ publicRoute
         res.send('Put Method');
     });
 
+publicRoute.use((req, res, next) => {
+    res.status(404).send('Requested URL not found');
+    next();
+});
+
+publicRoute.use((err, req, res, next) => {
+    if (err.message) {
+        res.status(500).send(err.message);
+    } else {
+        req.status(500).send('There was an error!');
+    }
+});
+
 export default publicRoute;
