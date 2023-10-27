@@ -152,20 +152,20 @@ publicRoute.param('user', (req, res, next, id) => {
     if (num === Number) {
         req.user = num === 1 ? 'admin' : 'anoynomous';
     } else {
-        next('Not a valid id');
+        next();
     }
     console.log('I am called once');
     next();
 });
 
-publicRoute.get('/:user', (req, res, next) => {
+publicRoute.get('/about/:user', (req, res, next) => {
     console.log(req.body);
     console.log('called here');
     // res.send(`This is user page of ${req.user}`);
     next();
 });
 
-publicRoute.get('/:user', (req, res) => {
+publicRoute.get('/about/:user', (req, res) => {
     console.log(req.body);
     console.log('called here also');
     res.send(`This is about/user page of ${req.user}`);
@@ -221,6 +221,15 @@ publicRoute.get('/async', (req, res, next) => {
             res.send(data);
         }
     });
+
+    // setTimeout(() => {
+    //     try {
+    // throw new Error('BROKEN');
+    //         console.log(a);
+    //     } catch (err) {
+    //         next(err);
+    //     }
+    // }, 100);
 });
 
 // 404 error handler
