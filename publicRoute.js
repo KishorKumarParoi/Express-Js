@@ -8,6 +8,7 @@
 
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import fs from 'fs';
 import handle from './handle.js';
 
 // module scaffolding
@@ -144,7 +145,15 @@ publicRoute.get('/about/:id', (req, res) => {
 });
 
 publicRoute.param('user', (req, res, next, id) => {
-    req.user = id === '1' ? 'admin' : 'anoynomous';
+    console.log('🚀 ~ file: publicRoute.js:148 ~ publicRoute.param ~ id:', id);
+    const num = Number(id);
+    console.log('🚀 ~ file: publicRoute.js:149 ~ publicRoute.param ~ num:', num);
+
+    if (num === Number) {
+        req.user = num === 1 ? 'admin' : 'anoynomous';
+    } else {
+        next('Not a valid id');
+    }
     console.log('I am called once');
     next();
 });
@@ -202,6 +211,16 @@ publicRoute.get('/', (req, res, next) => {
         }
     }
     res.end();
+});
+
+publicRoute.get('/async', (req, res, next) => {
+    fs.readFile('/file-doesnot-exist', (err, data) => {
+        if (err) {
+            next(err);
+        } else {
+            res.send(data);
+        }
+    });
 });
 
 // 404 error handler
