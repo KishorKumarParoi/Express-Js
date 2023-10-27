@@ -213,24 +213,31 @@ publicRoute.get('/', (req, res, next) => {
     res.end();
 });
 
-publicRoute.get('/async', (req, res, next) => {
-    fs.readFile('/file-doesnot-exist', (err, data) => {
-        if (err) {
+publicRoute.get('/async', [
+    (req, res, next) => {
+        fs.readFile('/file-doesnot-exist', 'utf-8', (err, data) => {
+            // if (err) {
+            console.log(data);
             next(err);
-        } else {
-            res.send(data);
-        }
-    });
+            // console.log(data.property); // here crashed as we send error through next()
+            // } else {
+            // res.send(data);
+            // }
+        });
 
-    // setTimeout(() => {
-    //     try {
-    // throw new Error('BROKEN');
-    //         console.log(a);
-    //     } catch (err) {
-    //         next(err);
-    //     }
-    // }, 100);
-});
+        // setTimeout(() => {
+        //     try {
+        // throw new Error('BROKEN');
+        //         console.log(a);
+        //     } catch (err) {
+        //         next(err);
+        //     }
+        // }, 100);
+    },
+    (req, res, next) => {
+        console.log(data.property);
+    },
+]);
 
 // 404 error handler
 publicRoute.use((req, res, next) => {
