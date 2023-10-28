@@ -215,13 +215,13 @@ publicRoute.get('/', (req, res, next) => {
 publicRoute.get('/async', [
     (req, res, next) => {
         // fs.readFile('/file-doesnot-exist', 'utf-8', (err, data) => {
-        //     // if (err) {
+        // if (err) {
         //     console.log(data);
         //     next(err);
-        //     // console.log(data.property); // here crashed as we send error through next()
-        //     // } else {
-        //     // res.send(data);
-        //     // }
+        // console.log(data.property); // here crashed as we send error through next()
+        // } else {
+        // res.send(data);
+        // }
         // });
 
         setTimeout(() => {
