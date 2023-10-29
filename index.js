@@ -8,18 +8,20 @@
 
 // dependencies
 import express from 'express';
-import adminRoute from './adminRouter.js';
-import blogAdmin from './blogRoute.js';
-import publicRoute from './publicRoute.js';
+// import adminRoute from './adminRouter.js';
+// import blogAdmin from './blogRoute.js';
+// import publicRoute from './publicRoute.js';
 // import testRoute from './testRoute.js';
+import multerRoute from './multer.js';
 
 // module scaffolding
 const app = express();
 
-app.use('/admin', adminRoute);
-app.use('/blog', blogAdmin);
-app.use(publicRoute);
+// app.use('/admin', adminRoute);
+// app.use('/blog', blogAdmin);
+// app.use(publicRoute);
 // app.use(testRoute);
+app.use(multerRoute);
 
 app.listen(3000, () => {
     console.log('Listening to port 3000');
