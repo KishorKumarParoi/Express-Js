@@ -9,6 +9,9 @@
 import express from 'express';
 import multer from 'multer';
 
-const router = express.Router();
+const multerRoute = express.Router();
+console.log(multerRoute);
 console.log(multer);
-console.log(router);
+console.log('Hello Kishor');
+
+export default multerRoute;
