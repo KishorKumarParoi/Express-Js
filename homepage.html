@@ -8,9 +8,12 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Hello World!</h1>
-    </div>
+    <h1>Hello World</h1>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="avatar">
+        <input type="submit" value="Submit">
+    </form>
 </body>
 
 </html>

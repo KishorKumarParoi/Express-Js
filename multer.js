@@ -10,38 +10,35 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path';
 
-console.log(multer);
+// console.log(multer);
 console.log('Hello Kishor');
 
 // file upload folder
-const UPLOADS_FOLDER = 'uploads/';
+const UPLOADS_FOLDER = './uploads';
 
 // prepare the final multer upload object
 const upload = multer({
     dest: UPLOADS_FOLDER,
 });
 
-// upload.firstName = 'Kishor';
-// upload.dest = UPLOADS_FOLDER;
-
-// console.log(upload);
-
 // module scaffolding
 const app = express();
+
 app.set('view engine', 'ejs');
-app.set('uploads', path.resolve('./uploads'));
-app.use(express.json());
+app.set('views', path.resolve('./uploads'));
+app.use(express.urlencoded({ extended: false }));
 
 // application route
-app.post('/', upload.single('avatar'), (req, res, next) => {
-    // res.write('KKP');
-    // console.log(req.file);
+
+app.get('/', (req, res) => res.render('homepage'));
+
+app.post('/upload', upload.single('avatar'), (req, res) => {
     console.log(req.body);
-    res.send('Hello World!');
-    next();
+    console.log(req.file);
+    // res.send('Hello World!');
+    res.redirect('/');
+    // next();
     // res.end();
 });
-
-app.get('/', (req, res) => res.send('Homepage!'));
 
 export default app;
