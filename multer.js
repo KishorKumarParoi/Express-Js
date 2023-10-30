@@ -14,12 +14,12 @@ console.log(multer);
 console.log('Hello Kishor');
 
 // file upload folder
-// const UPLOADS_FOLDER = './uploads';
+const UPLOADS_FOLDER = 'uploads/';
 
 // prepare the final multer upload object
-// const upload = multer({
-//     dest: UPLOADS_FOLDER,
-// });
+const upload = multer({
+    dest: UPLOADS_FOLDER,
+});
 
 // upload.firstName = 'Kishor';
 // upload.dest = UPLOADS_FOLDER;
@@ -33,12 +33,15 @@ app.set('uploads', path.resolve('./uploads'));
 app.use(express.json());
 
 // application route
-// app.post('/', upload.single('avatar'), (req, res) => {
-//     res.write('KKP');
-//     res.send('Hello World!');
-//     res.end();
-// });
+app.post('/', upload.single('avatar'), (req, res, next) => {
+    // res.write('KKP');
+    // console.log(req.file);
+    console.log(req.body);
+    res.send('Hello World!');
+    next();
+    // res.end();
+});
 
-app.get('/', (req, res) => res.render('Homepage!'));
+app.get('/', (req, res) => res.send('Homepage!'));
 
 export default app;
