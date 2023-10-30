@@ -9,9 +9,23 @@
 import express from 'express';
 import multer from 'multer';
 
-const multerRoute = express.Router();
-console.log(multerRoute);
 console.log(multer);
 console.log('Hello Kishor');
 
-export default multerRoute;
+// file upload folder
+const UPLOADS_FOLDER = './uploads/';
+
+// prepare the final multer upload object
+const upload = multer({
+    dest: UPLOADS_FOLDER,
+});
+
+// module scaffolding
+const app = express();
+
+// application route
+app.post('/', upload.single('avatar'), (req, res) => {
+    res.send('Hello World!');
+});
+
+export default app;
