@@ -34,7 +34,7 @@ app.get('/', (req, res) => res.render('homepage'));
 app.post('/upload', upload.single('kkp'), (req, res) => {
     console.log(req.body);
     console.log(req.file);
-    // res.send('Hello World!');
+    res.send('Hello World!');
     res.redirect('/');
 });
 
