@@ -31,11 +31,11 @@ app.use(express.json());
 // application route
 app.get('/', (req, res) => res.render('homepage'));
 
-app.post('/upload', upload.single('kkp'), (req, res) => {
+app.post('/upload', upload.array('kkp', 3), (req, res) => {
     console.log(req.body);
     console.log(req.file);
     res.send('Hello World!');
-    res.redirect('/');
+    // res.redirect('/');
 });
 
 app.listen(3000, () => {
