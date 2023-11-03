@@ -19,6 +19,9 @@ const UPLOADS_FOLDER = './uploads/';
 // prepare the final multer upload object
 const upload = multer({
     dest: UPLOADS_FOLDER,
+    limits: {
+        fileSize: 5000000,
+    },
 });
 
 // module scaffolding
@@ -46,7 +49,6 @@ app.post(
     ]),
     (req, res) => {
         console.log(req.body);
-        console.log(req.file);
         res.send('Hello World!');
         // res.redirect('/');
     }
