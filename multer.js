@@ -10,7 +10,7 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path';
 
-console.log(path);
+// console.log(path);
 console.log('Hello Kishor');
 
 // file upload folder
@@ -20,11 +20,22 @@ const UPLOADS_FOLDER = './uploads/';
 const upload = multer({
     dest: UPLOADS_FOLDER,
     limits: {
-        fileSize: 5000000,
+        fileSize: 1000000,
     },
-    // fileFilter: (req, file, cb) => {
-    //     console.log(file);
-    // },
+    fileFilter: (req, file, cb) => {
+        console.log(file);
+        if (
+            file.mimetype === 'image/png' ||
+            file.mimetype === 'image/jpg' ||
+            file.mimetype === 'image/jpeg'
+        ) {
+            console.log('kishor');
+            cb(null, true);
+        } else {
+            console.log('paroi');
+            cb(null, false);
+        }
+    },
 });
 
 // module scaffolding
