@@ -112,7 +112,8 @@ app.post(
         },
     ]),
     (req, res) => {
-        console.log(req.body);
+        // console.log(req.body);
+        console.log(req.files);
         res.send('Hello World KKP !');
         // res.redirect('/');
     }
