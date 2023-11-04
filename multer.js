@@ -16,9 +16,32 @@ console.log('Hello Kishor');
 // file upload folder
 const UPLOADS_FOLDER = './uploads/';
 
+// disk storage
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, UPLOADS_FOLDER);
+    },
+
+    filename: (req, file, cb) => {
+        // Important file.pdf => important-file-3435454394350.pdf
+        const fileExt = path.extname(file.originalname);
+        console.log('🚀 ~ file: multer.js:28 ~ fileExt :', fileExt);
+
+        const fileName = `${file.originalname
+            .replace(fileExt, '')
+            .toLowerCase()
+            .split(' ')
+            .join('-')}-${Date.now()}`;
+
+        console.log('🚀 ~ file: multer.js:35 ~ fileName:', fileName);
+        cb(null, fileName + fileExt);
+    },
+});
+
 // prepare the final multer upload object
 const upload = multer({
-    dest: UPLOADS_FOLDER,
+    // dest: UPLOADS_FOLDER,
+    storage,
     limits: {
         fileSize: 1000000,
     },
