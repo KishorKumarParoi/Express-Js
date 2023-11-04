@@ -24,17 +24,27 @@ const upload = multer({
     },
     fileFilter: (req, file, cb) => {
         console.log(file);
-        if (
-            file.mimetype === 'image/png' ||
-            file.mimetype === 'image/jpg' ||
-            file.mimetype === 'image/jpeg'
-        ) {
-            console.log('kishor');
-            // cb('Successfully Uploaded Files to the server', true);
-            cb(null, true);
+        if (file.fieldname === 'image') {
+            if (
+                file.mimetype === 'image/png' ||
+                file.mimetype === 'image/jpg' ||
+                file.mimetype === 'image/jpeg'
+            ) {
+                console.log('kishor');
+                // cb('Successfully Uploaded Files to the server', true);
+                cb(null, true);
+            } else {
+                console.log('paroi');
+                cb(new Error('Only  jpg, jpeg and png are allowed'));
+            }
+        } else if (file.fieldname === 'doc') {
+            if (file.mimetype === 'application/pdf' || file.mimetype === 'application/zip') {
+                cb(null, true);
+            } else {
+                cb(new Error('Only pdf and zip are allowed'));
+            }
         } else {
-            console.log('paroi');
-            cb(new Error('Only  jpg, jpeg and png are allowed'));
+            cb(new Error('There was an unknown error!'));
         }
     },
 });
@@ -67,7 +77,7 @@ app.post(
     '/upload',
     upload.fields([
         {
-            name: 'kkp',
+            name: 'doc',
             maxCount: 1,
         },
         {
