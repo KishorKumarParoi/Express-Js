@@ -22,6 +22,9 @@ const upload = multer({
     limits: {
         fileSize: 5000000,
     },
+    // fileFilter: (req, file, cb) => {
+    //     console.log(file);
+    // },
 });
 
 // module scaffolding
@@ -44,7 +47,10 @@ app.post(
         },
         {
             name: 'gallery',
-            maxCount: 3,
+            maxCount: 1,
+        },
+        {
+            name: 'image',
         },
     ]),
     (req, res) => {
@@ -55,11 +61,10 @@ app.post(
 );
 
 // uploading form
-// app.post('/upload', upload.none(), (req, res) => {
-//     console.log(req.body);
-//     console.log(req.file);
-//     res.send('Hello World');
-// });
+app.post('/test', upload.none(), (req, res) => {
+    console.log(req.body);
+    res.send('Hello World');
+});
 
 app.listen(3000, () => {
     console.log('Listening to port 3000');
