@@ -30,10 +30,11 @@ const upload = multer({
             file.mimetype === 'image/jpeg'
         ) {
             console.log('kishor');
+            // cb('Successfully Uploaded Files to the server', true);
             cb(null, true);
         } else {
             console.log('paroi');
-            cb(null, false);
+            cb(new Error('Only  jpg, jpeg and png are allowed'));
         }
     },
 });
@@ -45,6 +46,19 @@ app.set('views', path.resolve('./Raw/'));
 
 // app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use((err, req, res, next) => {
+    if (err) {
+        if (err instanceof multer.MulterError) {
+            res.status(500).send('There was an upload error !');
+        } else {
+            res.status(500).send(err.message);
+        }
+    } else {
+        res.send('Success!');
+    }
+    next();
+});
 
 // application route
 app.get('/', (req, res) => res.render('homepage'));
@@ -66,7 +80,7 @@ app.post(
     ]),
     (req, res) => {
         console.log(req.body);
-        res.send('Hello World!');
+        res.send('Hello World KKP !');
         // res.redirect('/');
     }
 );
