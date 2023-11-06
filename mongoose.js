@@ -9,9 +9,6 @@
 // dependencies
 import express from 'express';
 import mongoose from 'mongoose';
-import punycode from 'punycode';
-
-console.log(punycode);
 
 // express app initialization
 const app = express();
