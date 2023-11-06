@@ -12,7 +12,8 @@ import express from 'express';
 // import blogAdmin from './blogRoute.js';
 // import publicRoute from './publicRoute.js';
 // import testRoute from './testRoute.js';
-import multerRoute from './multer.js';
+// import multerRoute from './multer.js';
+import mongooseRoute from './mongoose.js';
 
 // module scaffolding
 const app = express();
@@ -21,8 +22,9 @@ const app = express();
 // app.use('/blog', blogAdmin);
 // app.use(publicRoute);
 // app.use(testRoute);
-app.use(multerRoute);
+// app.use(multerRoute);
+app.use(mongooseRoute);
 
-// app.listen(3000, () => {
-//     console.log('Listening to port 3000');
-// });
+app.listen(3000, () => {
+    console.log('Listening to port 3000');
+});
