@@ -8,8 +8,10 @@
 
 // dependencies
 import express from 'express';
+
 // module scaffolding
 const app = express();
+
 app.use(express.json());
 
 app.use('/', (req, res) => {
