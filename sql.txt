@@ -4,3 +4,9 @@ from (( customers
 inner join Orders on Orders.customer_id=Customers.customer_id)
 inner join Shippings on shippings.customer=customers.customer_id)
 where customers.age > 30 and shippings.status='delivered'
+
+left join :
+SELECT Customers.CustomerName, Orders.OrderID
+FROM Customers
+LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID
+ORDER BY Customers.CustomerName;
