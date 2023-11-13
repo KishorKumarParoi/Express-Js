@@ -6,7 +6,7 @@ inner join Shippings on shippings.customer=customers.customer_id)
 where customers.age > 30 and shippings.status='delivered'
 
 left join :
-SELECT Customers.CustomerName, Orders.OrderID
+SELECT Customers.CustomerName, Orders.OrderID 
 FROM Customers
 LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID
 ORDER BY Customers.CustomerName;
