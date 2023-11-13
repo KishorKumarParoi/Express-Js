@@ -1,0 +1,6 @@
+inner join : 
+select orders.customer_id, first_name, last_name, customers.country, customers.age, orders.amount, shippings.shipping_id, shippings.status
+from (( customers
+inner join Orders on Orders.customer_id=Customers.customer_id)
+inner join Shippings on shippings.customer=customers.customer_id)
+where customers.age > 30 and shippings.status='delivered'
