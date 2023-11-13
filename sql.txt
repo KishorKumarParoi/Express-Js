@@ -10,3 +10,8 @@ SELECT Customers.CustomerName, Orders.OrderID
 FROM Customers
 LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID
 ORDER BY Customers.CustomerName;
+
+self join :
+select A.first_name, B.first_name from Customers A, customers B
+where A.country = B.country and (A.first_name <> B.first_name)
+order by A.age
