@@ -15,3 +15,9 @@ self join :
 select A.first_name, B.first_name from Customers A, customers B
 where A.country = B.country and (A.first_name <> B.first_name)
 order by A.age
+
+union :
+select customer_id as id, first_name, country from customers
+group by country
+union
+select amount, item, customer_id as IDF from orders
