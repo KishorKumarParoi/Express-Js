@@ -21,3 +21,12 @@ select customer_id as id, first_name, country from customers
 group by country
 union
 select amount, item, customer_id as IDF from orders
+
+case :
+SELECT order_id, amount,
+CASE 
+    WHEN amount < 300 THEN 'The quantity is less than 300'
+    WHEN amount = 400 THEN 'The quantity is 400'
+    ELSE 'The quantity is over 300'
+END AS QuantityText
+FROM orders;
