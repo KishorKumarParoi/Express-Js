@@ -9,10 +9,20 @@
 // dependencies
 import express from 'express';
 import mongoose from 'mongoose';
+import punycode from 'punycode';
 
 // express app initialization
 const app = express();
 app.use(express.json());
+
+// punycode
+console.log(punycode);
+const domain = 'example.рф';
+const encodedDomain = punycode.encode(domain);
+console.log(encodedDomain); // Outputs: 'example.xn--p1ai'
+
+const decodedDomain = punycode.decode(encodedDomain);
+console.log(decodedDomain); // Outputs: 'example.рф'
 
 // database connection with mongoose
 mongoose
