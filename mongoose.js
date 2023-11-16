@@ -9,25 +9,25 @@
 // dependencies
 import express from 'express';
 import mongoose from 'mongoose';
-import punycode from 'punycode';
+import todoHandler from './routeHandler/todoHandler.js';
 
 // express app initialization
 const app = express();
 app.use(express.json());
 
 // punycode
-console.log(punycode);
-const domain = 'example.рф';
-const encodedDomain = punycode.encode(domain);
-console.log(encodedDomain); // Outputs: 'example.xn--p1ai'
+// console.log(punycode);
+// const domain = 'example.рф';
+// const encodedDomain = punycode.encode(domain);
+// console.log(encodedDomain); // Outputs: 'example.xn--p1ai'
 
-const decodedDomain = punycode.decode(encodedDomain);
-console.log(decodedDomain); // Outputs: 'example.рф'
+// const decodedDomain = punycode.decode(encodedDomain);
+// console.log(decodedDomain); // Outputs: 'example.рф'
 
 // database connection with mongoose
 mongoose
     .connect('mongodb://localhost/todos')
-    .then(() => console.log('Connection Succesfull'))
+    .then(() => console.log('Connection Successfull'))
     .catch((err) => console.log(err));
 
 // application routes
@@ -35,6 +35,8 @@ app.use('/', (req, res) => {
     console.log(req.body);
     res.send('Hello Kishor');
 });
+
+app.use('/todo', todoHandler);
 
 // default error handlers
 function errorhandler(err, req, res, next) {
