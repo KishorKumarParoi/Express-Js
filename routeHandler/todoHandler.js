@@ -30,18 +30,21 @@ router.get('/:id', async (req, res) => {
 // post a todo
 router.post('/', async (req, res) => {
     // res.send('Hello Kishor');
+    console.log(req.body);
     const newToDo = new Todo(req.body);
-    await newToDo.save((err) => {
-        if (err) {
-            res.status(500).json({
-                error: 'There was server side error!',
-            });
-        } else {
+    await newToDo
+        .save()
+        .then((data) => {
+            console.log(data);
             res.status(200).json({
                 message: 'Todo was inserted successfully!',
             });
-        }
-    });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: `${err}`,
+            });
+        });
 });
 
 // post multiple todo
