@@ -8,6 +8,11 @@
 
 // dependencies
 import express from 'express';
+import mongoose from 'mongoose';
+import todoSchema from '../schemas/todoSchemas.js';
+
+// creating a database Model
+const Todo = new mongoose.model('Todo', todoSchema);
 
 // express app initialization
 const router = express.Router();
@@ -24,7 +29,19 @@ router.get('/:id', async (req, res) => {
 
 // post a todo
 router.post('/', async (req, res) => {
-    res.send('Hello Kishor');
+    // res.send('Hello Kishor');
+    const newToDo = new Todo(req.body);
+    await newToDo.save((err) => {
+        if (err) {
+            res.status(500).json({
+                error: 'There was server side error!',
+            });
+        } else {
+            res.status(200).json({
+                message: 'Todo was inserted successfully!',
+            });
+        }
+    });
 });
 
 // post multiple todo
