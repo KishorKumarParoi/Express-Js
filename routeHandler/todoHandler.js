@@ -80,10 +80,10 @@ router.put('/:id', async (req, res) => {
             $set: req.body,
         },
         {
-            returnOriginal: false,
-            returnDocument: 'after',
-            new: true,
-            useFindAndModify: false,
+            // returnOriginal: false,
+            // returnDocument: 'after',
+            new: false,
+            // useFindAndModify: false,
         }
     )
         .then((data) => {
