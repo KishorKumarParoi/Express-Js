@@ -31,9 +31,9 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     // res.send('Hello Kishor');
     console.log(req.body);
-    const newToDo = new Todo(req.body);
-    await newToDo
-        .save()
+    // const newToDo = new Todo(req.body);
+    await Todo.create(req.body)
+        // .save()
         .then((data) => {
             console.log(data);
             res.status(200).json({
