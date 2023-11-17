@@ -41,7 +41,24 @@ router.get('/', async (req, res) => {
 
 // get a single todo with id
 router.get('/:id', async (req, res) => {
-    res.send('Hello Kishor');
+    // res.send('Hello Kishor');
+    await Todo.find({ _id: req.params.id })
+        .select({
+            _id: 0,
+            date: 0,
+        })
+        .limit(2)
+        .then((data) => {
+            res.status(200).json({
+                result: data,
+                message: 'Todo was fetched successfully!',
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: `${err}`,
+            });
+        });
 });
 
 // post a todo
