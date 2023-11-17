@@ -64,9 +64,33 @@ router.post('/all', async (req, res) => {
         });
 });
 
-// put a todo
+// update a todo with given id
 router.put('/:id', async (req, res) => {
-    res.send('Hello Kishor');
+    // res.send('Hello Kishor');
+
+    await Todo.updateOne(
+        { _id: req.params.id },
+        {
+            // $set: {
+            //     status: 'active',
+            //     title: 'Get a 500k Dollar Job',
+            //     author: 'Kishor Paroi',
+            // },
+
+            $set: req.body,
+        }
+    )
+        .then((data) => {
+            console.log(data);
+            res.status(200).json({
+                message: 'Todo was updated successfully!',
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: `${err}`,
+            });
+        });
 });
 
 // delete a todo
