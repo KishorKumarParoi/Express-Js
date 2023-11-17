@@ -21,6 +21,11 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     // res.send('Hello Kishor');
     await Todo.find({ status: 'inactive' })
+        .select({
+            _id: 0,
+            date: 0,
+        })
+        .limit(2)
         .then((data) => {
             res.status(200).json({
                 result: data,
