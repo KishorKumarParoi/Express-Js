@@ -19,7 +19,19 @@ const router = express.Router();
 
 // get all the todos
 router.get('/', async (req, res) => {
-    res.send('Hello Kishor');
+    // res.send('Hello Kishor');
+    await Todo.find({ status: 'inactive' })
+        .then((data) => {
+            res.status(200).json({
+                result: data,
+                message: 'Todo was fetched successfully!',
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: `${err}`,
+            });
+        });
 });
 
 // get a single todo with id
