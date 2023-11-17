@@ -31,11 +31,6 @@ mongoose
     .catch((err) => console.log(err));
 
 // application routes
-app.use('/', (req, res) => {
-    console.log(req.body);
-    res.send('Hello Kishor');
-});
-
 app.use('/todo', todoHandler);
 
 // default error handlers
@@ -46,5 +41,7 @@ function errorhandler(err, req, res, next) {
 
     return res.send(500).json({ error: err });
 }
+
+// errorhandler();
 
 export default app;
