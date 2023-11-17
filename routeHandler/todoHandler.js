@@ -49,7 +49,19 @@ router.post('/', async (req, res) => {
 
 // post multiple todo
 router.post('/all', async (req, res) => {
-    res.send('Hello Kishor');
+    // res.send('Hello Kishor');
+    await Todo.insertMany(req.body)
+        .then((data) => {
+            console.log(data);
+            res.status(200).json({
+                message: 'Todo was inserted successfully!',
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: `${err}`,
+            });
+        });
 });
 
 // put a todo
