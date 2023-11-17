@@ -68,7 +68,7 @@ router.post('/all', async (req, res) => {
 router.put('/:id', async (req, res) => {
     // res.send('Hello Kishor');
 
-    await Todo.updateOne(
+    await Todo.findByIdAndUpdate(
         { _id: req.params.id },
         {
             // $set: {
@@ -78,6 +78,12 @@ router.put('/:id', async (req, res) => {
             // },
 
             $set: req.body,
+        },
+        {
+            returnOriginal: false,
+            returnDocument: 'after',
+            new: true,
+            useFindAndModify: false,
         }
     )
         .then((data) => {
