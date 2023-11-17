@@ -135,7 +135,19 @@ router.put('/:id', async (req, res) => {
 
 // delete a todo
 router.delete('/:id', async (req, res) => {
-    res.send('Hello Kishor');
+    // res.send('Hello Kishor');
+    await Todo.deleteOne({ _id: req.params.id })
+        .then((data) => {
+            res.status(200).json({
+                result: data,
+                message: 'Todo was deleted successfully!',
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: `${err}`,
+            });
+        });
 });
 
 // export default router;
