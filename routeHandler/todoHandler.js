@@ -73,6 +73,20 @@ router.get('/active-callback', (req, res) => {
         });
 });
 
+router.get('/:language', async (req, res) => {
+    try {
+        const data = await Todo.find().byLanguage(req.params.language);
+        res.status(200).json({
+            result: data,
+            message: 'Todos were fetched successfully!',
+        });
+    } catch (err) {
+        res.status(500).json({
+            error: `${err}`,
+        });
+    }
+});
+
 router.get('/js', async (req, res) => {
     try {
         const data = await Todo.findByJS();

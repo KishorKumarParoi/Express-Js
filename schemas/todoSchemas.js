@@ -33,6 +33,13 @@ todoSchema.statics = {
     },
 };
 
+// query helpers
+todoSchema.query = {
+    byLanguage(language) {
+        return this.find({ title: new RegExp(language, 'i') });
+    },
+};
+
 console.log(todoSchema);
 
 // export default mongoose.model('Todo', todoSchema);
