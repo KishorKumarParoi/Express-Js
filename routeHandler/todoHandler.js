@@ -54,6 +54,25 @@ router.get('/active', async (req, res) => {
     }
 });
 
+// get active todo with callback
+// No longer accepts callback
+// hence promise .then catch method is used
+router.get('/active-callback', (req, res) => {
+    const todo = new Todo();
+    todo.findActiveCallback()
+        .then((data) => {
+            res.status(200).json({
+                result: data,
+                message: 'Active Todos were fetched successfully with callback!',
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                error: `${err}`,
+            });
+        });
+});
+
 // get a single todo with id
 router.get('/:id', async (req, res) => {
     // res.send('Hello Kishor');
