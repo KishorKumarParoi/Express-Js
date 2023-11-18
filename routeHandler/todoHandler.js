@@ -73,6 +73,20 @@ router.get('/active-callback', (req, res) => {
         });
 });
 
+router.get('/js', async (req, res) => {
+    try {
+        const data = await Todo.findByJS();
+        res.status(200).json({
+            result: data,
+            message: 'Todos were fetched successfully!',
+        });
+    } catch (err) {
+        res.status(500).json({
+            error: `${err}`,
+        });
+    }
+});
+
 // get a single todo with id
 router.get('/:id', async (req, res) => {
     // res.send('Hello Kishor');
