@@ -9,7 +9,8 @@
 // dependencies
 import express from 'express';
 import mongoose from 'mongoose';
-import todoHandler from './routeHandler/todoHandler.js';
+// import todoHandler from './routeHandler/todoHandler.js';
+import userHandler from './routeHandler/userHandler.js';
 
 // express app initialization
 const app = express();
@@ -31,7 +32,8 @@ mongoose
     .catch((err) => console.log(err));
 
 // application routes
-app.use('/todo', todoHandler);
+// app.use('/todo', todoHandler);
+app.use('/user', userHandler);
 
 // default error handlers
 function errorhandler(err, req, res, next) {
