@@ -55,9 +55,8 @@ router.post('/login', async (req, res) => {
         );
 
         if (isValidPassword) {
-            res.status(200).json({
-                message: 'Login successful!',
-            });
+            // generate token
+            
         } else {
             res.status(401).json({
                 error: 'Authentication failed!',
