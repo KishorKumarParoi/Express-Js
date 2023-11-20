@@ -19,5 +19,5 @@ const userSchema = mongoose.Schema({
     },
 });
 
-console.log(userSchema);
+// console.log(userSchema);
 export default userSchema;
