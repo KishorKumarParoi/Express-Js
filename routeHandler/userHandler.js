@@ -7,6 +7,7 @@
  */
 
 // dependencies
+import bcrypt from 'bcrypt';
 import express from 'express';
 import mongoose from 'mongoose';
 
@@ -19,19 +20,24 @@ const User = new mongoose.model('User', userSchema);
 // express app initialization
 const router = express.Router();
 
-// get all the users
-
-router.post('/', async (req, res) => {
-    // res.send('Hello World');
+// signup
+router.post('/signup', async (req, res) => {
     try {
-        const data = await User.create(req.body);
+        // const data = await User.create(req.body);
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const newUser = await User.create({
+            name: req.body.name,
+            username: req.body.username,
+            password: hashedPassword,
+            status: req.body.status,
+        });
         res.status(200).json({
-            result: data,
-            message: 'User was created successfully!',
+            result: newUser,
+            message: 'Signup was successful!',
         });
     } catch (err) {
         res.status(500).json({
-            error: `${err}`,
+            error: 'Signup failed!',
         });
     }
 });
