@@ -10,10 +10,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
 // import todoHandler from './routeHandler/todoHandler.js';
+import dotenv from 'dotenv';
 import userHandler from './routeHandler/userHandler.js';
 
 // express app initialization
 const app = express();
+dotenv.config();
 app.use(express.json());
 
 // punycode
