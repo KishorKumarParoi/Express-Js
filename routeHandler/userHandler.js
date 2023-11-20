@@ -41,5 +41,34 @@ router.post('/signup', async (req, res) => {
         });
     }
 });
+
+router.post('/login', async (req, res) => {
+    const user = await User.find({ username: req.body.username });
+    console.log('🚀 ~ file: userHandler.js:47 ~ router.post ~ user:', user);
+
+    if (user && user.length > 0) {
+        // res.send('found username');
+        const isValidPassword = await bcrypt.compare(req.body.password, user[0].password);
+        console.log(
+            '🚀 ~ file: userHandler.js:51 ~ router.post ~ isValidPassword',
+            isValidPassword
+        );
+
+        if (isValidPassword) {
+            res.status(200).json({
+                message: 'Login successful!',
+            });
+        } else {
+            res.status(401).json({
+                error: 'Authentication failed!',
+            });
+        }
+    } else {
+        res.status(401).json({
+            error: 'Authentication failed!',
+        });
+    }
+});
+
 // export default router;
 export default router;
