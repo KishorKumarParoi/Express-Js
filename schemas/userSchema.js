@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from 'mongoose';
+import mongoose from 'mongoose';
 
 const userSchema = mongoose.Schema({
     name: {
@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
     },
     todos: [
         {
-            type: Mongoose.Types.ObjectId,
+            type: mongoose.Types.ObjectId,
             ref: 'Todo',
         },
     ],
