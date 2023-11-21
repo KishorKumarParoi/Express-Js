@@ -9,8 +9,8 @@
 // dependencies
 import express from 'express';
 import mongoose from 'mongoose';
+import checkLogin from '../middlewares/checklogin.js';
 import todoSchema from '../schemas/todoSchemas.js';
-
 // creating a database Model
 const Todo = new mongoose.model('Todo', todoSchema);
 
@@ -18,7 +18,7 @@ const Todo = new mongoose.model('Todo', todoSchema);
 const router = express.Router();
 
 // get all the todos
-router.get('/', async (req, res) => {
+router.get('/', checkLogin, async (req, res) => {
     try {
         const data = await Todo.find({ status: 'inactive' })
             .select({
