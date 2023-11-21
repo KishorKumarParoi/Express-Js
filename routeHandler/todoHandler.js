@@ -11,8 +11,11 @@ import express from 'express';
 import mongoose from 'mongoose';
 import checkLogin from '../middlewares/checklogin.js';
 import todoSchema from '../schemas/todoSchemas.js';
+import userSchema from '../schemas/userSchema.js';
+
 // creating a database Model
 const Todo = new mongoose.model('Todo', todoSchema);
+const User = new mongoose.model('User', userSchema);
 
 // express app initialization
 const router = express.Router();
@@ -21,13 +24,11 @@ const router = express.Router();
 router.get('/', checkLogin, async (req, res) => {
     console.log(req.username, req.userId);
     try {
-        const data = await Todo.find({})
-            .populate('user', 'name username -_id')
-            .select({
-                _id: 0,
-                date: 0,
-            })
-            .limit(2);
+        const data = await Todo.find({}).populate('user', 'name username -_id').select({
+            _id: 0,
+            date: 0,
+        });
+        // .limit(2);
 
         res.status(200).json({
             result: data,
@@ -75,7 +76,7 @@ router.get('/active-callback', (req, res) => {
         });
 });
 
-router.get('/:language', async (req, res) => {
+router.get('/language/:language', async (req, res) => {
     try {
         const data = await Todo.find().byLanguage(req.params.language);
         res.status(200).json({
@@ -104,7 +105,7 @@ router.get('/js', async (req, res) => {
 });
 
 // get a single todo with id
-router.get('/:id', async (req, res) => {
+router.get('/id/:id', async (req, res) => {
     // res.send('Hello Kishor');
     try {
         const data = await Todo.find({ _id: req.params.id })
@@ -125,6 +126,27 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// get all user's todo
+router.get('/all', async (req, res) => {
+    // res.send('hello');
+    try {
+        const users = await User.find({})
+            .select({
+                _id: 0,
+                date: 0,
+            })
+            .populate('todos', 'title description user status');
+        res.status(200).json({
+            data: users,
+            message: 'All Todos were Fetched Successfullly!',
+        });
+    } catch (err) {
+        res.status(500).json({
+            Error: `${err}`,
+        });
+    }
+});
+
 // post a todo
 router.post('/', checkLogin, async (req, res) => {
     try {
@@ -132,6 +154,18 @@ router.post('/', checkLogin, async (req, res) => {
             ...req.body,
             user: req.userId,
         });
+
+        await User.updateOne(
+            {
+                _id: req.userId,
+            },
+            {
+                $push: {
+                    todos: data._id,
+                },
+            }
+        );
+
         console.log(data);
         res.status(200).json({
             result: data,
