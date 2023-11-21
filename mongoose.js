@@ -44,7 +44,7 @@ const errorhandler = (err, req, res, next) => {
         return next(err);
     }
     // console.log('🚀 ~ file: mongoose.js:98 ~ errorhandler ~ err', err);
-    res.status(500).json({
+    return res.status(500).json({
         error: `${err}`,
     });
 };
