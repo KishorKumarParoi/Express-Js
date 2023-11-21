@@ -16,6 +16,7 @@
     "import/no-extraneous-dependencies": 0,
     "operator-linebreak": 0,
     "comma-dangle": 0,
+    "new-cap": 0,
     "prettier/prettier": [
       "error",
       {
