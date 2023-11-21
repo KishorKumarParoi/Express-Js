@@ -21,7 +21,8 @@ const router = express.Router();
 router.get('/', checkLogin, async (req, res) => {
     console.log(req.username, req.userId);
     try {
-        const data = await Todo.find({ status: 'inactive' })
+        const data = await Todo.find({})
+            .populate('user', 'name username -_id')
             .select({
                 _id: 0,
                 date: 0,
@@ -125,9 +126,12 @@ router.get('/:id', async (req, res) => {
 });
 
 // post a todo
-router.post('/', async (req, res) => {
+router.post('/', checkLogin, async (req, res) => {
     try {
-        const data = await Todo.create(req.body);
+        const data = await Todo.create({
+            ...req.body,
+            user: req.userId,
+        });
         console.log(data);
         res.status(200).json({
             result: data,
