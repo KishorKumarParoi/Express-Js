@@ -19,6 +19,7 @@ const router = express.Router();
 
 // get all the todos
 router.get('/', checkLogin, async (req, res) => {
+    console.log(req.username, req.userId);
     try {
         const data = await Todo.find({ status: 'inactive' })
             .select({
@@ -33,7 +34,7 @@ router.get('/', checkLogin, async (req, res) => {
         });
     } catch (err) {
         res.status(500).json({
-            error: `${err}`,
+            error: `Error: ${err}`,
         });
     }
 });

@@ -34,16 +34,19 @@ mongoose
     .catch((err) => console.log(err));
 
 // application routes
-app.use('/todo', todoHandler);
 app.use('/user', userHandler);
+app.use('/todo', todoHandler);
 
 // default error handlers
 const errorhandler = (err, req, res, next) => {
     if (res.headerSent) {
+        // console.log('Header already sent');
         return next(err);
     }
-
-    return res.send(500).json({ error: err });
+    // console.log('🚀 ~ file: mongoose.js:98 ~ errorhandler ~ err', err);
+    res.status(500).json({
+        error: `${err}`,
+    });
 };
 
 app.use(errorhandler);

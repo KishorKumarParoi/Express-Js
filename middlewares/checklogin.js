@@ -7,9 +7,13 @@ const checkLogin = (req, res, next) => {
         const { username, userId } = decoded;
         req.username = username;
         req.userId = userId;
+        console.log(req.username, req.userId);
         next();
     } catch (err) {
-        next('Authentication failed!');
+        // res.status(401).json({ 'Error Happend': 'Authentication failures!' });
+        // res.status(401).json({ error: `${err}` });
+        // next();
+        next('Authentication failures!');
     }
 };
 
