@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Mongoose } from 'mongoose';
 
 const userSchema = mongoose.Schema({
     name: {
@@ -17,6 +17,12 @@ const userSchema = mongoose.Schema({
         type: String,
         enum: ['active', 'inactive'],
     },
+    todos: [
+        {
+            type: Mongoose.Types.ObjectId,
+            ref: 'Todo',
+        },
+    ],
 });
 
 // console.log(userSchema);
