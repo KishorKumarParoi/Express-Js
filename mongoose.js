@@ -7,10 +7,10 @@
  */
 
 // dependencies
+import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
-// import todoHandler from './routeHandler/todoHandler.js';
-import dotenv from 'dotenv';
+import todoHandler from './routeHandler/todoHandler.js';
 import userHandler from './routeHandler/userHandler.js';
 
 // express app initialization
@@ -34,18 +34,18 @@ mongoose
     .catch((err) => console.log(err));
 
 // application routes
-// app.use('/todo', todoHandler);
+app.use('/todo', todoHandler);
 app.use('/user', userHandler);
 
 // default error handlers
-function errorhandler(err, req, res, next) {
+const errorhandler = (err, req, res, next) => {
     if (res.headerSent) {
         return next(err);
     }
 
     return res.send(500).json({ error: err });
-}
+};
 
-// errorhandler();
+app.use(errorhandler);
 
 export default app;
